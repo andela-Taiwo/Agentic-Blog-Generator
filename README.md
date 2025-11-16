@@ -95,7 +95,7 @@ cp .env.example .env
 Launch application
 
 ```bash
-uv run streamlit run app/main.py
+uv run streamlit run app.py
 ```
 🚀 Usage
 Blog Generation Mode
