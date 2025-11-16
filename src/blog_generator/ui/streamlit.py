@@ -37,7 +37,6 @@ class LoadStreamlitUI:
                 self.user_controls["API_KEY"] = st.session_state["API_KEY"] = (
                     st.text_input("API Key", type="password")
                 )
-                # self.user_controls["OPENAI_API_KEY"] = st.session_state["OPENAI_API_KEY"]=st.text_input("API Key",type="password")
 
                 self.user_controls["selected_language"] = st.selectbox(
                     "Select Language", language_options

@@ -29,38 +29,63 @@ class BlogNode:
 
     def content_generation(self, state: BlogState):
         if "topic" in state and state["topic"]:
-            system_prompt = """You are expert blog writer. Use Markdown formatting.
-            Generate a detailed blog content with detailed breakdown for the {topic} using this structure.
-            
-            You are a professional blog writer. Create a comprehensive blog post about {topic} using this structure:
+            # system_prompt = """You are expert blog writer. Use Markdown formatting.
+            # Generate a detailed blog content with detailed breakdown for the {topic} using this structure.
 
-            # Engaging Main Title
+            # You are a professional blog writer. Create a comprehensive blog post about {topic} using this structure example:
 
-            ## Introduction
-            [Hook readers with compelling opening]
+            # # Engaging Main Title
 
-            ## Section Header (H2)
-            ### Subsection (H3)
-            **Key points in bold** with supporting details
-            - Bullet points for lists
-            - Practical examples
+            # > Introduction
+            # [Hook readers with compelling opening]
 
-            ### Another Subsection (H3)
-            *Subtle emphasis with italics*
-            1. Numbered steps where applicable
-            2. Clear progression
+            # > Section Header in (H2)
 
-            > Important insights in blockquotes
+            # > Subsection in (H3)
 
-            ## Conclusion
-            [Memorable summary with key takeaways]
-            
-            ## References
-            List out the references
+            # > Key points in bold** with supporting details
+            # - Bullet points for lists
+            # - Practical examples
 
-            Apply proper heading hierarchy, use bold/italics strategically, include examples, and maintain professional tone throughout.
+            # ### Another Subsection (H3)
+            # > Subtle emphasis with italics*
+            # 1. Numbered steps where applicable
+            # 2. Clear progression
 
+            # > Important insights in blockquotes
 
+            # ## Conclusion
+            # [Memorable summary with key takeaways]
+
+            # ## References
+            # List out the references
+
+            # Apply proper heading hierarchy, use bold/italics strategically, include examples, and maintain professional tone throughout.
+
+            # """
+            system_prompt = """You are a professional blog writer. Create a comprehensive blog post about {topic} using proper Markdown formatting.
+
+            **FORMATTING GUIDELINES:**
+
+            **HEADINGS:**
+            # Main Title (H1 - Engaging and SEO-friendly)
+            ## Section Headers (H2 - Major topics)
+            ### Subsection Headers (H3 - Detailed breakdowns)
+            #### Minor Points (H4 - When needed)
+
+            **TEXT FORMATTING:**
+            - **Bold** for key terms, definitions, and important concepts
+            - *Italics* for emphasis, book titles, and foreign words
+            - `Code format` for technical terms, commands, or specific references
+
+            **LISTS:**
+            - Bullet points (-) for features, benefits, and examples
+            1. Numbered lists for steps, processes, and sequences
+
+            **BLOCKQUOTES:**
+            > Use for quotes, important insights, or highlighted information
+
+            **STRUCTURE TEMPLATE:**
             """
             system_message = system_prompt.format(topic=state["topic"])
             response = self.llm.invoke(system_message)
@@ -121,7 +146,6 @@ class BlogNode:
             "english",
         }
 
-        # current_lang = state["current_language"]
         current_lang = str(state["current_language"]).lower().strip()
         return current_lang if current_lang in SUPPORTED_LANGUAGES else current_lang
 

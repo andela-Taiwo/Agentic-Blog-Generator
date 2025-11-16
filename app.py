@@ -2,6 +2,7 @@ import uvicorn
 from fastapi import FastAPI, Request
 from src.blog_generator.graphs.graph_builder import GraphBuilder
 from src.blog_generator.LLMS.groq_llm import GroqLLM
+import asyncio
 
 import os
 from dotenv import load_dotenv
@@ -14,6 +15,8 @@ print(os.getenv("LANGCHAIN_API_KEY"))
 
 os.environ["LANGSMITH_API_KEY"] = os.getenv("LANGCHAIN_API_KEY")
 
+
+# Commented out code below for reference oon n how to run as API
 # ## API's
 
 # @app.post("/blogs")
